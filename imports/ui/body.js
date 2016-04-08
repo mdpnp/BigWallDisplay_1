@@ -9,3 +9,7 @@ Template.body.helpers({
     return Patients.find({});
   },
 });
+
+Template.body.onCreated(function bodyOnCreated() {
+  Meteor.subscribe('patients_demo');
+});
