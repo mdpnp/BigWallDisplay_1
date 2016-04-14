@@ -2,10 +2,19 @@ import { Template } from 'meteor/templating';
 
 import { Patients } from '../api/patients.js';
  
+
+import './patient_info.js'; 
 import './body.html';
+
  
+// Template.body.helpers({
+//    patients() {
+//     return Patients.find({});
+//   },
+// });
+
 Template.body.helpers({
-   patients() {
+   patients : function() {
     return Patients.find({});
   },
 });
