@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-// import { ReactiveDict } from 'meteor/reactive-dict';
+import { ReactiveDict } from 'meteor/reactive-dict';
 
 import { Patients } from '../api/patients.js';
 
@@ -7,28 +7,40 @@ import './patient_info.html';
 
 Template.patient.helpers({
    patient() {
+   	//return a single patien for template data context
+   	const instance = Template.instance();
+    if (instance.state.get('patientID')) {
+      const patientID = instance.state.get('patientID');
+      return Patients.findOne({'patientID' : Number(patientID)});
+    }
     return Patients.findOne();
   },
-  // lastName()  {
-  // 	let randomPatient = Patients.findOne();
-  // 	// console.log(randomPatient);
-  // 	// let name = randomPatient===undefined ? '' : randomPatient.lastName
-  // 	return randomPatient===undefined ? '' : randomPatient.lastName;
-  // }
-  age() {
-//see http://stackoverflow.com/a/21984136/3961519
+   patients() {
+    return Patients.find({});
+  },
+  calc_age() {
+//calculate age. See http://stackoverflow.com/a/21984136/3961519
 	if (this.birthDate == undefined)
 	return '' ;
 
-  	var ageDifMs = Date.now() - this.birthDate.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+  	const ageDifMs = Date.now() - this.birthDate.getTime();
+    const ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
-  	// return this.lastName;
   }
+});
+
+
+Template.patient.events({
+	 "change #patient-select": function (event, template) {
+        var patientID = template.$(event.currentTarget).val();
+        template.state.set('patientID', patientID);
+        // console.log(patientID);
+    }
+
 });
 
 Template.patient.onCreated(function piOnCreated() {
   Meteor.subscribe('patients_demo');
-  // this.patient = new ReactiveDict();
-  // this.patient.set("patient", {lastName : "alonso"});
+  this.state = new ReactiveDict();
+
 });

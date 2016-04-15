@@ -17,6 +17,9 @@ Template.body.helpers({
    patients : function() {
     return Patients.find({});
   },
+  thispatient : function(skip){
+  	return Patients.findOne({},{skip : skip});
+  }
 });
 
 Template.body.onCreated(function bodyOnCreated() {

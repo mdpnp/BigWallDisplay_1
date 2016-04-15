@@ -1,6 +1,20 @@
 
 <template name="patient">
-{{#with patient}}
-  {{lastName}} , {{firstName}} - {{age}} years old
-{{/with}}
+
+	<div>
+		<select id="patient-select">
+    		<option disabled="disabled" selected="selected">Please Select</option> 
+		    {{#each patients}}
+		        <option value="{{patientID}}">{{lastName}}</option>
+		    {{/each}}
+		</select>
+
+	</div>
+
+	<div style="border: 1px solid black">
+	{{#with patient}}
+	  {{patient.lastName}} , {{patient.firstName}} - {{calc_age}} years old
+	{{/with}}
+	</div>
+
 </template>
