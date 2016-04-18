@@ -1,13 +1,18 @@
 
-<template name="patient">
+<template name="patient_info">
 
 	<div>
-		<select id="patient-select">
-    		<option disabled="disabled" selected="selected">Please Select</option> 
-		    {{#each patients}}
-		        <option value="{{patientID}}">{{lastName}}</option>
-		    {{/each}}
-		</select>
+		{{#with patient}}
+	  		{{patient.lastName}} , {{patient.firstName}}
+		{{/with}}
+		<span style="float:right">
+			<select id="patient-select">
+	    		<option disabled="disabled" selected="selected">Please Select</option> 
+			    {{#each patients}}
+			        <option value="{{patientID}}">{{lastName}}</option>
+			    {{/each}}
+			</select>
+		</span>
 
 	</div>
 

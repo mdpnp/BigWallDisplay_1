@@ -4,18 +4,37 @@
       <h1>Patients</h1>
     </header>
  
-    <ul>
-      {{#each patients}}
-        {{> patientInfo}}
-      {{/each}}
-    </ul>
-  </div>
+   <div class="row">
 
+      <div class="col-md-3" style="background: red;">
+        {{> patient_info}}
+      </div>
+
+      <div class="col-md-3" style="background: lavenderblush;">      
+        {{> patient_info}}
+      </div>
+
+            <div class="col-md-3" style="background: orange;">      
+        {{> patient_info}}
+      </div>
+
+            <div class="col-md-3" style="background: green;">      
+        {{> patient_info}}
+      </div>
+
+      <div class="col-md-3" style="background: cyan;">      
+        {{> patient_info}}
+      </div>
+
+    </div>
+
+  </div>
+<!-- 
   {{> patient}}
-  <hr/>
-  {{> patient}}
+
+  {{> patient}} -->
 </body>
  
-<template name="patientInfo">
+<!-- <template name="patientInfo">
   <li>{{firstName}} - {{lastName}}</li>
-</template>
+</template> -->

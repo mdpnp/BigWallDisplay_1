@@ -5,7 +5,7 @@ import { Patients } from '../api/patients.js';
 
 import './patient_info.html';
 
-Template.patient.helpers({
+Template.patient_info.helpers({
    patient() {
    	//return a single patien for template data context
    	const instance = Template.instance();
@@ -30,7 +30,7 @@ Template.patient.helpers({
 });
 
 
-Template.patient.events({
+Template.patient_info.events({
 	 "change #patient-select": function (event, template) {
         var patientID = template.$(event.currentTarget).val();
         template.state.set('patientID', patientID);
@@ -39,7 +39,7 @@ Template.patient.events({
 
 });
 
-Template.patient.onCreated(function piOnCreated() {
+Template.patient_info.onCreated(function piOnCreated() {
   Meteor.subscribe('patients_demo');
   this.state = new ReactiveDict();
 
