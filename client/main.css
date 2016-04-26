@@ -1,1 +1,6 @@
 /* CSS declarations go here */
+
+/* overwrite bootstrap's page-header class to save space on top of this element*/
+.page-header{
+	margin-top: 5px;
+}
