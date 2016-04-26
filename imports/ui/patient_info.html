@@ -19,7 +19,8 @@
 
 	<div style="border: 1px solid black">
 	{{#with patient}}
-	  <div>Age: {{calc_age}} yo. {{patient.race}} {{patient.gender}} - {{patient.height}} cm. {{patient.weight}} Kg. </div>
+	  <div>Age: {{calc_age}} yo. {{patient.race}} {{patient.gender}} - {{patient.height}} cm. {{patient.weight}} Kg. 
+	  </div>
 	  {{#if hasAllergies}}
 	  	<div style="background: orange; border-radius: 5px"> <span class="glyphicon glyphicon-warning-sign" style="color:red;">&nbsp;</span>Allergies: {{patient.allergies}}</div> 
 	  {{else}}

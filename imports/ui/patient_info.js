@@ -47,14 +47,31 @@ Template.patient_info.helpers({
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
   ,hasAllergies () {
-  	if (this.allergies === undefined)
+  	return patientHasAllergies(this);
+  	// if (this.allergies === undefined)
+  	// 	return false;
+  	// if (this.allergies == null || this.allergies.trim() === '' || this.allergies === 'none')
+  	// 	return false;
+
+  	// return true;
+  }
+  ,noAllergies(){
+  	return !patientHasAllergies(this);
+  }
+});
+
+
+// Auxiliarify function to reuse functionality. 
+// returns 'true' if the patient has allergies
+// (the parameter patient object has an allergies field and its content is not 'none')
+patientHasAllergies = function(patient){
+	if (patient === undefined || patient.allergies === undefined)
   		return false;
-  	if (this.allergies == null || this.allergies.trim() === '' || this.allergies === 'none')
+  	if (patient.allergies == null || patient.allergies.trim() === '' || patient.allergies === 'none')
   		return false;
 
   	return true;
-  }
-});
+}
 
 
 Template.patient_info.events({
