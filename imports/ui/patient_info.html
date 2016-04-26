@@ -7,7 +7,8 @@
 		{{/with}}
 		<span style="float:right">
 			<select id="patient-select" >
-	    		<option disabled="disabled" selected="selected" >Select Patient</option>     		
+	    		<option disabled="disabled" selected="selected" >Select Patient</option>   
+	    		<!-- <option value="none">no patient</option>  		 -->
 			    {{#each patients}}
 			        <option value="{{patientID}}">{{lastName}}, {{firstName}}</option>
 			    {{/each}}

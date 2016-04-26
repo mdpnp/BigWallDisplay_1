@@ -16,7 +16,8 @@ Template.patient_info.helpers({
     return Patients.findOne();
   },
    patients() {
-    return Patients.find({});
+    // return Patients.find({});
+    return Patients.find({}, {sort : {'lastName':1, 'firstName' : 1} });
   },
   calc_age() {
 //calculate age. See http://stackoverflow.com/a/21984136/3961519
