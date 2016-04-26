@@ -5,15 +5,33 @@ import { Patients } from '../api/patients.js';
 
 import './patient_info.html';
 
+
+// This dumy patient is just to represent the "empty template"
+// meaning giving "fake" context data to the template
+const dummy_patient = {
+	"_id" : '000',
+	"lastName" : "last name",
+	"firstName" : "first name",
+	"gender" : "male",
+	"birthDate" : new Date(),
+	"maritalStatus" : "single",
+	"race" : "white",
+	"allergies" : "none",
+	"height" : 180,
+	"weight" : 80
+}
+
+
 Template.patient_info.helpers({
    patient() {
-   	//return a single patien for template data context
+   	//return a single patient for template data context
    	const instance = Template.instance();
-    if (instance.state.get('patientID')) {
+    if (instance.state.get('patientID')) {//check patient that has been selected on the dropdown
       const patientID = instance.state.get('patientID');
       return Patients.findOne({'patientID' : Number(patientID)});
     }
     return Patients.findOne();
+    // return dummy_patient;
   },
    patients() {
     // return Patients.find({});
@@ -27,6 +45,14 @@ Template.patient_info.helpers({
   	const ageDifMs = Date.now() - this.birthDate.getTime();
     const ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+  ,hasAllergies () {
+  	if (this.allergies === undefined)
+  		return false;
+  	if (this.allergies == null || this.allergies.trim() === '' || this.allergies === 'none')
+  		return false;
+
+  	return true;
   }
 });
 
