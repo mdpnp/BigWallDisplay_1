@@ -58,6 +58,7 @@ Template.patient_info.helpers({
   ,noAllergies(){
   	return !patientHasAllergies(this);
   }
+
 });
 
 
