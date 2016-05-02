@@ -22,7 +22,10 @@
 	  <div>Age: {{calc_age}} yo. {{patient.race}} {{patient.gender}} - {{patient.height}} cm. {{patient.weight}} Kg. 
 	  </div>
 	  {{#if hasAllergies}}
-	  	<div style="background: orange; border-radius: 5px"> <span class="glyphicon glyphicon-warning-sign" style="color:red;">&nbsp;</span>Allergies: {{patient.allergies}}</div> 
+	  	<div style="background: orange; border-radius: 5px"> 
+	  		<span class="glyphicon glyphicon-warning-sign" style="color:red;padding: 1px 5px;"></span>
+	  		Allergies: {{patient.allergies}}
+	  	</div> 
 	  {{else}}
 	  	<div>Allergies: {{patient.allergies}}</div> 
 	  {{/if}}
