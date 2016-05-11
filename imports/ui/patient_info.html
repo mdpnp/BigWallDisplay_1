@@ -29,9 +29,29 @@
 	  {{else}}
 	  	<div>Allergies: No known allergies.</div> 
 	  {{/if}}
+
+	  <!-- blood pressure -->
+	  <div style="background:{{../bkgcolor}}">
+	 	 <span style="font-size: 20px; font-weight: bold"> Blood Pressure </span>
+	 	 <!-- <span style="display:inline-block;vertical-align:top">SYS</span>
+	 	 <span style="display:inline-block;vertical-align:bottom">DIAS</span> -->
+	 	 <div style="position: relative; display: inline; padding-left: 10px;">
+	 	 	<div style="position: absolute;vertical-align:top;display: inline-block;border-bottom: 1px solid #fff">SYS</div>
+	 	 	<!-- <div style="position: absolute;vertical-align:top;display: inline-block;z-index: 0"></div> -->
+	 	 	<div style="position: absolute;vertical-align:bottom;display: inline-block;top:8px;padding-top:5px">DIAS</div>
+		</div>	
+
+	  	 <span style="float: right;font-size: 12px; font-weight: bold">90/60</span>
+	  </div>
+
+	  <!-- heart rate  -->
 	  <div >Heart Rate <span style="float: right;font-size: 12px; font-weight: bold">30</span></div>
-	  <div style="background:{{../bkgcolor}}">Blood Pressure <span style="float: right;font-size: 12px; font-weight: bold">90/60</span></div>
-	  <div>Temperature <span style="float: right;font-size: 12px; font-weight: bold">98.6F</span></div>
+	  
+	  <!-- temperature -->
+	  <div>Temperature <span style="float: right;font-size: 12px; font-weight: bold">37 C</span></div>
+
+	  <!-- SPO2 -->
+	   <div>SPO <sub>2</sub> <span style="float: right;font-size: 12px; font-weight: bold">98.6F</span></div>
 	{{/with}}
 	</div>
 
