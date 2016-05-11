@@ -25,21 +25,61 @@
  
    <div class="row">
 
-<!--       <div class="col-md-3" style="background: red;">
+      <div class="col-md-3" style="background: #00cc99;">
         {{> patient_info}}
       </div>
 
-      <div class="col-md-3" style="background: lavenderblush;">      
+      <div class="col-md-3" style="background: #66ccff;">      
         {{> patient_info}}
       </div>
 
-            <div class="col-md-3" style="background: orange;">      
+            <div class="col-md-3" style="background: #00cc99;">      
         {{> patient_info}}
       </div>
 
-            <div class="col-md-3" style="background: green;">      
+            <div class="col-md-3" style="background: #66ccff;">      
         {{> patient_info}}
-      </div> -->
+      </div>
+    </div>  
+
+
+    <div class="row">
+
+      <div class="col-md-3" style="background: #66ccff;">
+        {{> patient_info}}
+      </div>
+
+      <div class="col-md-3" style="background: #00cc99;">      
+        {{> patient_info}}
+      </div>
+
+            <div class="col-md-3" style="background: #66ccff;">      
+        {{> patient_info}}
+      </div>
+
+            <div class="col-md-3" style="background: #00cc99;">      
+        {{> patient_info}}
+      </div>
+    </div>  
+
+   <div class="row">
+
+      <div class="col-md-3" style="background: #00cc99;">
+        {{> patient_info}}
+      </div>
+
+      <div class="col-md-3" style="background: #66ccff;">      
+        {{> patient_info}}
+      </div>
+
+            <div class="col-md-3" style="background: #00cc99;">      
+        {{> patient_info}}
+      </div>
+
+            <div class="col-md-3" style="background: #66ccff;">      
+        {{> patient_info}}
+      </div>
+    </div>   
 
 <!-- I'm  going to add two colums spanning 6, to check layout-->
 <!--       <div class="col-md-6" style="background: #00cc99;">      
@@ -84,19 +124,22 @@
         {{> patient_info}}
       </div> -->
 
+
+
+
       <!-- The 10 value is harcoded right now, but in the future it could be a value we get from the session upon user's configuration. -->
-      {{#each loopCount 10}}
+<!--       {{#each loopCount 10}}
         <div class="col-md-6" style="background: {{color}};">      
           {{> patient_info}}
         </div>
-      {{/each}}
-    </div>
+      {{/each}}-->
+
  
 <!--  this br is here just to force a "footer" to see the bottom end of the div -templates
  this should be replaced for a more meaningful HTML element -->
     <br/>
 
-  </div>
+  </div> <!-- container div -->
 <!-- 
   {{> patient}}
 
