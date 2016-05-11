@@ -1,0 +1,33 @@
+#div1 { 
+    width : 50%;
+    height: 40px;
+    float:left;
+    padding-top: 10px;
+}
+#div2 { 
+    width : 50%;
+    height: 40px;
+    float:right;
+    /*overflow-y:scroll;*/
+}
+
+#msgErreur {
+/*    color:white;*/
+    position:absolute;
+    width : 45%;
+
+}
+#msgErreur > div {
+    position: relative;
+    text-align: left;
+    height : 20px;
+}
+
+#msgErreur > div > span{
+    float: right;
+    padding-right: 5px;
+}
+
+#msgErreur > div:first-child{
+    border-bottom: 1px solid #fff;
+}
