@@ -4,6 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Patients } from '../api/patients.js';
 
 import './patient_info.html';
+import './patient_info.css';
 
 
 // This dumy patient is just to represent the "empty template"
