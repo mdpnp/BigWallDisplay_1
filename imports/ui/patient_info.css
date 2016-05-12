@@ -1,33 +1,49 @@
-#div1 { 
+/*left div for metric caption*/
+
+#left-container { 
     width : 50%;
     height: 40px;
     float:left;
     padding-top: 10px;
 }
-#div2 { 
+
+
+#left-container > span {
+    font-size: 16px; 
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+/*right div for a 'double decker' div */
+#right-container { 
     width : 50%;
     height: 40px;
     float:right;
     /*overflow-y:scroll;*/
 }
 
-#msgErreur {
+#double-decker {
 /*    color:white;*/
     position:absolute;
     width : 45%;
 
 }
-#msgErreur > div {
+#double-decker > div {
     position: relative;
     text-align: left;
     height : 20px;
 }
 
-#msgErreur > div > span{
+#double-decker > div > span{
     float: right;
     padding-right: 5px;
+
+    font-size: 12px; 
+    font-weight: bold;
 }
 
-#msgErreur > div:first-child{
+#double-decker > div:first-child{
     border-bottom: 1px solid #fff;
 }
