@@ -63,13 +63,44 @@ Template.patient_info.helpers({
   //		Info blue     : textcolor: #31708f;  backgroundcolor: #d9edf7;
   //  - message : message to display to the clinical staff
   ,patientAssesment() {
-  	return {
+
+  	// for demos purposes only 
+
+  	healthy = {
   		backgroundcolor : '#47d147', 
   		textcolor: '#0f3d0f',
-  		// alert : 'alert-danger',
   		message : 'Patient OK',
-  		status : 'Healthy' // healthy, alert, danger, info.
+  		status : 'Healthy'
   	}
+  	alert = {
+  		backgroundcolor : '#ffff00', 
+  		textcolor: '#8a6d3b',
+  		message : 'Warning...',
+  		status : 'Alert'
+  	}
+  	danger = {
+  		backgroundcolor : '#ff0000', 
+  		textcolor: '#fff',
+  		message : 'Patient Alert',
+  		status : 'Danger'
+  	}
+  	info = {
+  		backgroundcolor : '#d9edf7', 
+  		textcolor: '#31708f',
+  		message : 'Info Message',
+  		status : 'Info'
+  	}
+
+  	const val = Math.floor(Math.random() * 4);
+  	let fakeassesment = healthy;
+  	if (val === 1 ) 
+  		fakeassesment = alert;
+  	else if (val === 2)
+  		fakeassesment = danger;
+  	else if(val === 3)
+  		fakeassesment = info;
+
+  	return fakeassesment;
   }
 
 });

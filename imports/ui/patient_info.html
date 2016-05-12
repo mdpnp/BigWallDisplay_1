@@ -40,13 +40,13 @@
 	  {{/if}}
 
 	  	  <!-- assesment -->
-	  <!-- {{#with patientAssesment}} -->
-	  <div style="background: {{patientAssesment.backgroundcolor}}; border-radius: 2px;">
+	  {{#with patientAssesment}}
+	  <div style="background: {{backgroundcolor}}; border-radius: 2px;">
 	  <!-- <div class="alert {{patientAssesment.alert}}" role="alert" style="padding: 2px;margin-bottom: 2px;"> -->
 	  	<span style="font-weight: bold;">Assesment: </span>
-	  	<span style="color: {{patientAssesment.textcolor}}">{{patientAssesment.message}}</span>
+	  	<span style="color: {{textcolor}}">{{message}}</span>
 	  </div>
-	  <!-- {{/with}} -->
+	  {{/with}}
 
 	  <!-- blood pressure -->
 	  <div>
