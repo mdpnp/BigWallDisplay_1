@@ -1,6 +1,9 @@
 
 <template name="patient_info">
 
+<div>
+
+<!-- Header: patient name and dropdown menu -->
 	<div>
 		{{#with patient}}
 	  		{{patient.lastName}} , {{patient.firstName}}
@@ -17,10 +20,16 @@
 
 	</div>
 
-	<div style="border: 1px solid black">
+<!-- body: metrics -->
+	<div style="border: 1px solid black;">
 	{{#with patient}}
-	  <div>Age: {{calc_age}} yo. {{patient.race}} {{patient.gender}} - {{patient.height}} cm. {{patient.weight}} Kg. 
+
+	<!-- patient demographics -->
+	  <div>
+	  	Age: {{calc_age}} yo. {{patient.race}} {{patient.gender}} - {{patient.height}} cm. {{patient.weight}} Kg. 
 	  </div>
+
+	  <!-- allergies -->
 	  {{#if hasAllergies}}
 	  	<div style="background: orange; border-radius: 5px"> 
 	  		<span class="glyphicon glyphicon-warning-sign" style="color:red;padding: 1px 5px;"></span>
@@ -29,6 +38,15 @@
 	  {{else}}
 	  	<div>Allergies: No known allergies.</div> 
 	  {{/if}}
+
+	  	  <!-- assesment -->
+	  <!-- {{#with patientAssesment}} -->
+	  <div style="background: {{patientAssesment.backgroundcolor}}; border-radius: 2px;">
+	  <!-- <div class="alert {{patientAssesment.alert}}" role="alert" style="padding: 2px;margin-bottom: 2px;"> -->
+	  	<span style="font-weight: bold;">Assesment: </span>
+	  	<span style="color: {{patientAssesment.textcolor}}">{{patientAssesment.message}}</span>
+	  </div>
+	  <!-- {{/with}} -->
 
 	  <!-- blood pressure -->
 	  <div>
@@ -39,11 +57,11 @@
 	        <div id="double-decker">
 	            <div>
 	            	<span title="systolic pressure">SYS</span>
-            		<span>90/60</span>
+            		<span>115/135</span>
             	</div>
 	            <div>
 	            	<span title="diastolic pressure">DIAS</span>
-            		<span>90/60</span>
+            		<span>70/90</span>
 	            </div>
 	        </div>
 	    </div>
@@ -52,7 +70,7 @@
 
 
 	  <!-- heart rate  -->
-	  <div >
+	  <div>
 	  	<span class="metric-caption"> Heart Rate </span>
 	    <span class="metric-reading">30</span>
 	  </div>
@@ -79,12 +97,14 @@
 	  </div>
 
 	  <!-- temperature -->
-	  <div>
+	  <div >
 	  	<span class="metric-caption"> Temperature</span>
 	  	<span class="metric-reading">37&deg;C</span>
 	  </div>
 
 	{{/with}}
 	</div>
+
+</div>
 
 </template>
