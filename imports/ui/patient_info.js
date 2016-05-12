@@ -54,7 +54,7 @@ Template.patient_info.helpers({
   	return !patientHasAllergies(this);
   }
 
-  // retruns a patient assesment base on their metrics
+  // returns a patient assesment base on their metrics
   // this function returns a JSON object with 
   //  - color : background color to display in the UI: 
   //		Healthy green : textcolor: '#0f3d0f, backgroundcolor : '#33cc33', 
@@ -67,7 +67,8 @@ Template.patient_info.helpers({
   		backgroundcolor : '#33cc33', 
   		textcolor: '#0f3d0f',
   		// alert : 'alert-danger',
-  		message : 'Patient OK'
+  		message : 'Patient OK',
+  		status : 'Healthy' // healthy, alert, danger, info.
   	}
   }
 
