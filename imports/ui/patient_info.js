@@ -57,14 +57,14 @@ Template.patient_info.helpers({
   // returns a patient assesment base on their metrics
   // this function returns a JSON object with 
   //  - color : background color to display in the UI: 
-  //		Healthy green : textcolor: '#0f3d0f, backgroundcolor : '#33cc33', 
+  //		Healthy green : textcolor: '#0f3d0f, backgroundcolor : '#47d147', 
   //		Alert Yellow  : textcolor: #8a6d3b,  backgroundcolor: #ffff00;
   //		Danger Red    : textcolor: #fff, 	 backgroundcolor: #ff0000;
   //		Info blue     : textcolor: #31708f;  backgroundcolor: #d9edf7;
   //  - message : message to display to the clinical staff
   ,patientAssesment() {
   	return {
-  		backgroundcolor : '#33cc33', 
+  		backgroundcolor : '#47d147', 
   		textcolor: '#0f3d0f',
   		// alert : 'alert-danger',
   		message : 'Patient OK',
