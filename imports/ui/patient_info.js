@@ -11,15 +11,15 @@ import './patient_info.css';
 // meaning giving "fake" context data to the template
 const dummy_patient = {
 	"_id" : '000',
-	"lastName" : "last name",
-	"firstName" : "first name",
-	"gender" : "male",
+	"lastName" : "no name",
+	"firstName" : "no name",
+	"gender" : "?",
 	"birthDate" : new Date(),
-	"maritalStatus" : "single",
-	"race" : "white",
+	"maritalStatus" : "?",
+	"race" : "?",
 	"allergies" : "none",
-	"height" : 180,
-	"weight" : 80
+	"height" : 0,
+	"weight" : 0
 }
 
 
@@ -31,8 +31,8 @@ Template.patient_info.helpers({
       const patientID = instance.state.get('patientID');
       return Patients.findOne({'patientID' : Number(patientID)});
     }
-    return Patients.findOne();
-    // return dummy_patient;
+    // return Patients.findOne();
+    return dummy_patient;
   },
    patients() {
     // return Patients.find({});
