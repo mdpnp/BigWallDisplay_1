@@ -60,13 +60,15 @@ Template.patient_info.helpers({
     const pr_avg = data === undefined || data.pulse_rate === undefined ? '-' : data.pulse_rate.sum / data.pulse_rate.count;
 
     data_sample = {
-      temperatureAvg : tempAvg
-      ,blood_pressure_sys_avg : bp_sys_avg
-      ,blood_pressure_dias_avg : bp_dias_avg
-      ,heart_rate_avg : hr_avg
+      temperature : temp_avg
+      ,blood_pressure_sys : bp_sys_avg
+      ,blood_pressure_dias : bp_dias_avg
+      ,heart_rate : hr_avg
       ,spo2_sat : spo2_avg
       ,pulse_rate : pr_avg
     }
+
+    // console.log(data_sample)
     
     return data_sample;
 

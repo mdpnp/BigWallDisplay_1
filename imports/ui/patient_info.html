@@ -57,11 +57,11 @@
 	        <div id="double-decker">
 	            <div>
 	            	<span title="systolic pressure">SYS</span>
-            		<span>115/135</span>
+            		<span>{{datasamples.blood_pressure_sys}}</span>
             	</div>
 	            <div>
 	            	<span title="diastolic pressure">DIAS</span>
-            		<span>70/90</span>
+            		<span>{{datasamples.blood_pressure_dias}}</span>
 	            </div>
 	        </div>
 	    </div>
@@ -72,27 +72,27 @@
 	  <!-- heart rate  -->
 	  <div>
 	  	<span class="metric-caption"> Heart Rate </span>
-	    <span class="metric-reading">95</span>
+	    <span class="metric-reading">{{datasamples.heart_rate}}</span>
 	  </div>
 
 	  <!-- Pulse rate -->
 	  <div>
 	  	<span class="metric-caption"> Pulse Rate <sub>bpm</sub> </span>
-	    <span class="metric-reading">95</span>
+	    <span class="metric-reading">{{datasamples.pulse_rate}}</span>
 	  </div>
 	  
 
 	  	  <!-- SpO2 saturation-->
 	  <div>
 	  	<span class="metric-caption"> SpO<sub>2</sub>% </span>
-	    <span class="metric-reading">95</span>
+	    <span class="metric-reading">{{datasamples.spo2_sat}}</span>
 	  </div>
 	  
 
 	  <!-- temperature -->
 	  <div >
 	  	<span class="metric-caption"> Temperature</span>
-	  	<span class="metric-reading">{{datasamples.temperatureAvg}}&deg;C</span>
+	  	<span class="metric-reading">{{datasamples.temperature}}&deg;C</span>
 	  </div>
 
 	{{/with}}
