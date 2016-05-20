@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
 import { Patients } from '../api/patients.js';
+import {Datasample_second} from '../api/patients.js';
 
 import './patient_info.html';
 import './patient_info.css';
@@ -24,6 +25,7 @@ const dummy_patient = {
 
 
 Template.patient_info.helpers({
+  //returns the information of a single patient
    patient() {
    	//return a single patient for template data context
    	const instance = Template.instance();
@@ -33,12 +35,23 @@ Template.patient_info.helpers({
     }
     // return Patients.findOne();
     return dummy_patient;
-  },
-   patients() {
+  }
+  //returns all patients
+   ,patients() {
     // return Patients.find({});
     return Patients.find({}, {sort : {'lastName':1, 'firstName' : 1} });
-  },
-  calc_age() {
+  }
+  ,datasamples(){
+    const data = Datasample_second.find({'patientID' : Number(27)} , {sort : {timestamp : -1}, limit : 1}).fetch()[0];
+    // const data = Datasample_second.findOne({'patientID' : Number(27)});
+    var tempAvg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
+    data_sample = {
+      temperatureAvg : tempAvg
+    }
+    return data_sample;
+  }
+
+  ,calc_age() {
 //calculate age. See http://stackoverflow.com/a/21984136/3961519
 	if (this.birthDate == undefined)
 	return '' ;
@@ -129,7 +142,9 @@ Template.patient_info.events({
 });
 
 Template.patient_info.onCreated(function piOnCreated() {
+  //subscriptions
   Meteor.subscribe('patients_demo');
+  Meteor.subscribe('datasample_second');
   this.state = new ReactiveDict();
 
 });
