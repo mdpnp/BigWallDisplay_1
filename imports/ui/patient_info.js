@@ -42,13 +42,22 @@ Template.patient_info.helpers({
     return Patients.find({}, {sort : {'lastName':1, 'firstName' : 1} });
   }
   ,datasamples(){
-    const data = Datasample_second.find({'patientID' : Number(27)} , {sort : {timestamp : -1}, limit : 1}).fetch()[0];
-    // const data = Datasample_second.findOne({'patientID' : Number(27)});
+    const instance = Template.instance();
+    let data = undefined
+    if (instance.state.get('patientID')) {
+        const patientID = instance.state.get('patientID');
+        //find returns a cursor, so we need to use fetch, to convert to array. 
+        // We are limiting to only one (the latest) sample --> array notation to get the object from the array
+        data = Datasample_second.find({'patientID' : Number(patientID)} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+    }
+
     var tempAvg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
     data_sample = {
       temperatureAvg : tempAvg
     }
+    
     return data_sample;
+
   }
 
   ,calc_age() {
