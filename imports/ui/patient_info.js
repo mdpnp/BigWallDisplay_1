@@ -51,9 +51,14 @@ Template.patient_info.helpers({
         data = Datasample_second.find({'patientID' : Number(patientID)} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
     }
 
-    var tempAvg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
+    const tempAvg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
+
     data_sample = {
       temperatureAvg : tempAvg
+      // ,blood_pressure_sys_avg : 
+      // ,blood_pressure_dias_avg :
+      // heart_rate_avg : 
+      // spo2_sat
     }
     
     return data_sample;
