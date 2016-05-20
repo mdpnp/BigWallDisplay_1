@@ -51,14 +51,21 @@ Template.patient_info.helpers({
         data = Datasample_second.find({'patientID' : Number(patientID)} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
     }
 
-    const tempAvg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
+
+    const temp_avg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
+    const bp_sys_avg = data === undefined || data.blood_pressure_sys === undefined ? '-' : data.blood_pressure_sys.sum / data.blood_pressure_sys.count;
+    const bp_dias_avg = data === undefined || data.blood_pressure_dias === undefined ? '-' : data.blood_pressure_dias.sum / data.blood_pressure_dias.count;
+    const hr_avg = data === undefined || data.heart_rate === undefined ? '-' : data.heart_rate.sum / data.heart_rate.count;
+    const spo2_avg = data === undefined || data.spo2 === undefined ? '-' : data.spo2.sum / data.spo2.count;
+    const pr_avg = data === undefined || data.pulse_rate === undefined ? '-' : data.pulse_rate.sum / data.pulse_rate.count;
 
     data_sample = {
       temperatureAvg : tempAvg
-      // ,blood_pressure_sys_avg : 
-      // ,blood_pressure_dias_avg :
-      // heart_rate_avg : 
-      // spo2_sat
+      ,blood_pressure_sys_avg : bp_sys_avg
+      ,blood_pressure_dias_avg : bp_dias_avg
+      ,heart_rate_avg : hr_avg
+      ,spo2_sat : spo2_avg
+      ,pulse_rate : pr_avg
     }
     
     return data_sample;
