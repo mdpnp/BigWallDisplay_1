@@ -17,12 +17,12 @@ Returns the css color for the temperature value in the UI
 */
 export const temperature_color = function(temperature) {
 
-	if (temperature == undefined)
-		return 'black';
+	if (temperature == undefined || temperature == "-")
+		return '';
 	temp = Number(temperature)
 	if(temp >= 36.1 && temp <= 37.8)
-		return  '#31708f';
+		return  ''; //or healthy green?
 	else
-		return 'red';
+		return 'color : #fff;  background: red; border-radius:5px; padding:2px;';
 
 }
