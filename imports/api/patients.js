@@ -22,7 +22,23 @@ Patients.deny({
 	,remove : function(userId, doc){
 		return true;
 	}
-})
+});
+
+// Explicitly deny any writes in the datasample_second collection. 
+// This application is a "read only" app to display info, not to modify data
+Datasample_second.deny({
+	insert : function(userid, doc){
+		return true;
+	}
+
+	,update : function(userId, doc, fields, modifier){
+		return true;
+	}
+
+	,remove : function(userId, doc){
+		return true;
+	}
+});
 
 if (Meteor.isServer) {
 
