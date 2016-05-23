@@ -4,8 +4,13 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Patients } from '../api/patients.js';
 import {Datasample_second} from '../api/patients.js';
 
+import { patientHasAllergies } from '../api/demographic.js'
+// import { temperature_color } from 'patient_info_ui.js'
+
 import './patient_info.html';
 import './patient_info.css';
+// import './patient_info_ui.js';
+const patient_tile_styles = require('./patient_info_ui.js');
 
 
 // This dumy patient is just to represent the "empty template"
@@ -90,6 +95,11 @@ Template.patient_info.helpers({
   	return !patientHasAllergies(this);
   }
 
+  ,getTemperatureColor(temperature){
+// if (undefined != this.temperature) {}
+    return patient_tile_styles.temperature_color(temperature);
+  }
+
   // returns a patient assesment base on their metrics
   // this function returns a JSON object with 
   //  - color : background color to display in the UI: 
@@ -142,17 +152,17 @@ Template.patient_info.helpers({
 });
 
 
-// Auxiliarify function to reuse functionality. 
-// returns 'true' if the patient has allergies
-// (the parameter patient object has an allergies field and its content is not 'none')
-patientHasAllergies = function(patient){
-	if (patient === undefined || patient.allergies === undefined)
-  		return false;
-  	if (patient.allergies == null || patient.allergies.trim() === '' || patient.allergies === 'none')
-  		return false;
+// // Auxiliarify function to reuse functionality. 
+// // returns 'true' if the patient has allergies
+// // (the parameter patient object has an allergies field and its content is not 'none')
+// patientHasAllergies = function(patient){
+// 	if (patient === undefined || patient.allergies === undefined)
+//   		return false;
+//   	if (patient.allergies == null || patient.allergies.trim() === '' || patient.allergies === 'none')
+//   		return false;
 
-  	return true;
-}
+//   	return true;
+// }
 
 
 Template.patient_info.events({

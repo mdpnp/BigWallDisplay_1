@@ -92,7 +92,7 @@
 	  <!-- temperature -->
 	  <div >
 	  	<span class="metric-caption"> Temperature</span>
-	  	<span class="metric-reading">{{datasamples.temperature}}&deg;C</span>
+	  	<span class="metric-reading" style="color : {{getTemperatureColor datasamples.temperature }}">{{datasamples.temperature}}&deg;C</span>
 	  </div>
 
 	{{/with}}
