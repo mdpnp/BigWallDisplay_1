@@ -109,44 +109,16 @@ Template.patient_info.helpers({
   //		Info blue     : textcolor: #31708f;  backgroundcolor: #d9edf7;
   //  - message : message to display to the clinical staff
   ,patientAssesment() {
+    let patientdata = undefined;
+    const instance = Template.instance();
+    if (instance.state.get('patientID')) {
+        const patientID = instance.state.get('patientID');
+        //find returns a cursor, so we need to use fetch, to convert to array. 
+        // We are limiting to only one (the latest) sample --> array notation to get the object from the array
+        patientdata = Datasample_second.find({'patientID' : Number(patientID)} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+    }
+    return patient_tile_styles.patient_assesment(patientdata);
 
-  	// for demos purposes only 
-
-  	healthy = {
-  		backgroundcolor : '#47d147', 
-  		textcolor: '#0f3d0f',
-  		message : 'Patient OK',
-  		status : 'Healthy'
-  	}
-  	alert = {
-  		backgroundcolor : '#ffff00', 
-  		textcolor: '#8a6d3b',
-  		message : 'Warning...',
-  		status : 'Alert'
-  	}
-  	danger = {
-  		backgroundcolor : '#ff0000', 
-  		textcolor: '#fff',
-  		message : 'Patient Alert',
-  		status : 'Danger'
-  	}
-  	info = {
-  		backgroundcolor : '#d9edf7', 
-  		textcolor: '#31708f',
-  		message : 'Info Message',
-  		status : 'Info'
-  	}
-
-  	const val = Math.floor(Math.random() * 4);
-  	let fakeassesment = healthy;
-  	if (val === 1 ) 
-  		fakeassesment = alert;
-  	else if (val === 2)
-  		fakeassesment = danger;
-  	else if(val === 3)
-  		fakeassesment = info;
-
-  	return fakeassesment;
   }
 
 });
