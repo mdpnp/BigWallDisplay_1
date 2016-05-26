@@ -14,26 +14,31 @@ This class has functionality to improve the layout of the patinet info tile
   		backgroundcolor : '#47d147', 
   		textcolor: '#0f3d0f',
   		message : 'Patient OK',
-  		status : 'Healthy'
+  		status : 'Healthy',
+  		dangerLevel : 0
   	}
   let	alert = {
   		backgroundcolor : '#ffff00', 
   		textcolor: '#8a6d3b',
   		message : 'Warning...',
-  		status : 'Alert'
+  		status : 'Alert',
+  		dangerLevel : 1
   	}
   let	danger = {
   		backgroundcolor : '#ff0000', 
   		textcolor: '#fff',
   		message : 'Patient Alert',
-  		status : 'Danger'
+  		status : 'Danger',
+  		dangerLevel : 2
   	}
   let	info = {
   		backgroundcolor : '#d9edf7', 
   		textcolor: '#31708f',
   		message : 'Info Message',
-  		status : 'Info'
+  		status : 'Info',
+  		dangerLevel : 0
   	}
+
 
 
 
@@ -60,6 +65,16 @@ Returns a JSON object to display the patient assesment with a certain layout
 */
 export const patient_assesment = function(patientdata){
 
+	let assesment = healthy; //basic assesment
+    let message = ''; //message to be displayed with the assesment
+    let assesmentDangerLevel = 0; //a degree of severity of the assesment (it is actually )
+
+	if (patientdata == undefined){
+		assesment = info;
+		assesment.message = "No patient selected";
+		return assesment;
+	}
+
 	//properties from te patient assesment
 	let temp_avg = patientdata === undefined || patientdata.temperature === undefined ? '-' : patientdata.temperature.sum / patientdata.temperature.count;
 	let bp_sys_avg = patientdata === undefined || patientdata.blood_pressure_sys === undefined ? '-' : patientdata.blood_pressure_sys.sum / patientdata.blood_pressure_sys.count;
@@ -68,22 +83,25 @@ export const patient_assesment = function(patientdata){
     let spo2_avg = patientdata === undefined || patientdata.spo2 === undefined ? '-' : patientdata.spo2.sum / patientdata.spo2.count;
     let pr_avg = patientdata === undefined || patientdata.pulse_rate === undefined ? '-' : patientdata.pulse_rate.sum / patientdata.pulse_rate.count;
 
-    let assesment = healthy; //basic assesment
-    let message = ''; //message to be displayed with the assesment
+
 
     //BLOOD PRESSURE
 
     /* 
     Systolic in mmHg    Diastolic in mmHg  Category
     below 120				below 80		Normal blood pressure
-    120 - 139				80 - 39			Prehyertension
+    120 - 139				80 - 89			Prehyertension
     140 - 159				90 - 99			Stage 1 hypertension
     160 or higher			100 or higher   Stage 2 Hyperension
 
     */
-    if(bp_sys_avg  <= 120  && bp_dias_avg <= 80 ){
-		message += " Normal Blood Pressure ";
-    }else if( (bp_sys_avg  >= 120 && bp_sys_avg  <= 139) && 
+    bp_sys_avg  = bp_sys_avg  === '-' ? 0 : Number(bp_sys_avg);
+    bp_dias_avg = bp_dias_avg === '-' ? 0 : Number(bp_dias_avg);
+
+  //   if(bp_sys_avg  <= 120  && bp_dias_avg <= 80 ){
+		// message += " Normal Blood Pressure ";
+  //   }else 
+    if( (bp_sys_avg  >= 120 && bp_sys_avg  <= 139) && 
     	(bp_dias_avg >= 80  && bp_dias_avg <= 89 )){
     	//prehypertension
 	    // assesment = alert;
@@ -99,19 +117,75 @@ export const patient_assesment = function(patientdata){
 	    message += " Stage 2 Hypertension ";
 	}
 
+	//HEART RATE
 
+	/*
 
-	if(temp_avg === '-'){
-		return healthy
+	Normal resting rate for adults is 60 - 100
+
+	Above 100 bpm possible tachycardia
+	Below 60 bpm possible bradycardia
+	*/
+
+	hr_avg = hr_avg=== '-' ? 80 : Number(hr_avg);
+	//default to 80 just to skip the check right below
+	if (hr_avg > 100){
+		message += " Possible Tachycardia ";
+		assesmentDangerLevel = 1;
+	} else if (hr_avg < 60) {
+		message += " Possible Bradycardia ";
+		assesmentDangerLevel = 1;
 	}
-	else{
-		
-		temp_avg = Number(temp_avg);
-		if(temp_avg <= 36.1 || temp_avg >= 37.8){
+
+	//upgrade the danger level if we have to
+	if (assesmentDangerLevel > assesment.dangerLevel){
+		assesment = alert;
+	}
+
+	//Temperature
+	temp_avg = temp_avg === '-' ? 37 : Number(temp_avg);
+	//default to 37 just to avoid the check below
+	if (temp_avg <= 36.1 || temp_avg >= 37.8){
+		dangerLevel = 1;
+		message += " Check Temperature ";
+	}
+
+	//upgrade the danger level if we have to
+	if (assesmentDangerLevel > assesment.dangerLevel){
+		assesment = alert;
+	}
+
+	// SpO2 % SATURATION
+	/*
+		Normal reading is in the high 90s. 96%-99% is no cause of alarm
+		95% or less could indicate hypoxia (investigate)
+		90% or less definitely indicates hypoxia and need to be investigated
+	*/
+	spo2_avg = spo2_avg === '-' ? 100 : Number(spo2_avg);
+	//default to 100 to have a "healthy" value that skips the check below
+	if(spo2_avg >= 90 && spo2_avg <= 95){
+		message += " possible Hypoxia ";
+		assesmentDangerLevel = 1;//alert
+	} else if (spo2_avg < 90){
+		message += " Hypoxia ";
+		assesmentDangerLevel = 2;//danger
+	}
+
+		//upgrade the danger level if we have to
+	if (assesmentDangerLevel > assesment.dangerLevel){
+		if(assesmentDangerLevel === 1){
 			assesment = alert;
-			assesment.message = "Check temperature"
+		}else{
+			assesment = danger;
 		}
-		return assesment;
 	}
+
+
+//return the assesment
+	if(message != ''){
+		assesment.message = message;
+	}
+	return assesment;
+
 
 }
