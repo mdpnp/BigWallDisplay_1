@@ -69,24 +69,24 @@ export const patient_assesment = function(patientdata){
     let message = ''; //message to be displayed with the assesment
     let assesmentDangerLevel = 0; //a degree of severity of the assesment (it is actually )
 
-	if (patientdata == undefined){
+	if (patientdata === undefined){
 		assesment = info;
 		assesment.message = "No patient selected";
 		return assesment;
 	}
 
 	//properties from te patient assesment
-	let temp_avg = patientdata === undefined || patientdata.temperature === undefined ? '-' : patientdata.temperature.sum / patientdata.temperature.count;
-	let bp_sys_avg = patientdata === undefined || patientdata.blood_pressure_sys === undefined ? '-' : patientdata.blood_pressure_sys.sum / patientdata.blood_pressure_sys.count;
-    let bp_dias_avg = patientdata === undefined || patientdata.blood_pressure_dias === undefined ? '-' : patientdata.blood_pressure_dias.sum / patientdata.blood_pressure_dias.count;
-    let hr_avg = patientdata === undefined || patientdata.heart_rate === undefined ? '-' : patientdata.heart_rate.sum / patientdata.heart_rate.count;
-    let spo2_avg = patientdata === undefined || patientdata.spo2 === undefined ? '-' : patientdata.spo2.sum / patientdata.spo2.count;
-    let pr_avg = patientdata === undefined || patientdata.pulse_rate === undefined ? '-' : patientdata.pulse_rate.sum / patientdata.pulse_rate.count;
+	// Default values if the matching  fields are undefined are set to "healthy" values
+	let temp_avg = patientdata.temperature === undefined ? 37 : patientdata.temperature.sum / patientdata.temperature.count;
+	let bp_sys_avg = patientdata.blood_pressure_sys === undefined ? 0 : patientdata.blood_pressure_sys.sum / patientdata.blood_pressure_sys.count;
+    let bp_dias_avg = patientdata.blood_pressure_dias === undefined ? 0 : patientdata.blood_pressure_dias.sum / patientdata.blood_pressure_dias.count;
+    let hr_avg = patientdata.heart_rate === undefined ? 80 : patientdata.heart_rate.sum / patientdata.heart_rate.count;
+    let spo2_avg = patientdata.spo2 === undefined ? 100 : patientdata.spo2.sum / patientdata.spo2.count;
+    let pr_avg = patientdata.pulse_rate === undefined ? 80 : patientdata.pulse_rate.sum / patientdata.pulse_rate.count;
 
 
 
     //BLOOD PRESSURE
-
     /* 
     Systolic in mmHg    Diastolic in mmHg  Category
     below 120				below 80		Normal blood pressure
@@ -95,9 +95,6 @@ export const patient_assesment = function(patientdata){
     160 or higher			100 or higher   Stage 2 Hyperension
 
     */
-    bp_sys_avg  = bp_sys_avg  === '-' ? 0 : Number(bp_sys_avg);
-    bp_dias_avg = bp_dias_avg === '-' ? 0 : Number(bp_dias_avg);
-
   //   if(bp_sys_avg  <= 120  && bp_dias_avg <= 80 ){
 		// message += " Normal Blood Pressure ";
   //   }else 
@@ -118,16 +115,13 @@ export const patient_assesment = function(patientdata){
 	}
 
 	//HEART RATE
-
 	/*
-
 	Normal resting rate for adults is 60 - 100
 
 	Above 100 bpm possible tachycardia
 	Below 60 bpm possible bradycardia
 	*/
 
-	hr_avg = hr_avg=== '-' ? 80 : Number(hr_avg);
 	//default to 80 just to skip the check right below
 	if (hr_avg > 100){
 		message += " Possible Tachycardia ";
@@ -143,7 +137,6 @@ export const patient_assesment = function(patientdata){
 	}
 
 	//Temperature
-	temp_avg = temp_avg === '-' ? 37 : Number(temp_avg);
 	//default to 37 just to avoid the check below
 	if (temp_avg <= 36.1 || temp_avg >= 37.8){
 		dangerLevel = 1;
@@ -161,7 +154,6 @@ export const patient_assesment = function(patientdata){
 		95% or less could indicate hypoxia (investigate)
 		90% or less definitely indicates hypoxia and need to be investigated
 	*/
-	spo2_avg = spo2_avg === '-' ? 100 : Number(spo2_avg);
 	//default to 100 to have a "healthy" value that skips the check below
 	if(spo2_avg >= 90 && spo2_avg <= 95){
 		message += " possible Hypoxia ";
