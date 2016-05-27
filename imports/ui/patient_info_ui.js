@@ -65,7 +65,8 @@ Returns a JSON object to display the patient assesment with a certain layout
 */
 export const patient_assesment = function(patientdata){
 
-	let assesment = healthy; //basic assesment
+	// let assesment = healthy; //basic assesment
+	let assesment = jQuery.extend({}, healthy); //Issue #6. Makea shallow copy of object
     let message = ''; //message to be displayed with the assesment
     let assesmentDangerLevel = 0; //a degree of severity of the assesment (it is actually )
 
@@ -100,16 +101,13 @@ export const patient_assesment = function(patientdata){
   //   }else 
     if( (bp_sys_avg  >= 120 && bp_sys_avg  <= 139) && 
     	(bp_dias_avg >= 80  && bp_dias_avg <= 89 )){
-    	//prehypertension
 	    // assesment = alert;
 	    message += " Prehypertension.";
 	} else if( (bp_sys_avg  >= 140 && bp_sys_avg  <= 159) && 
     		   (bp_dias_avg >= 90  && bp_dias_avg <= 99 )){
-    	//Stage 1 prehypertension
 	    assesment = alert;
 	    message += " Stage 1 Hypertension.";
 	} else if(bp_sys_avg  >= 160  && bp_dias_avg >= 100 ){
-    	//prehypertension
 	    assesment = danger;
 	    message += " Stage 2 Hypertension.";
 	}
