@@ -102,16 +102,16 @@ export const patient_assesment = function(patientdata){
     	(bp_dias_avg >= 80  && bp_dias_avg <= 89 )){
     	//prehypertension
 	    // assesment = alert;
-	    message += " Prehypertension ";
+	    message += " Prehypertension.";
 	} else if( (bp_sys_avg  >= 140 && bp_sys_avg  <= 159) && 
     		   (bp_dias_avg >= 90  && bp_dias_avg <= 99 )){
     	//Stage 1 prehypertension
 	    assesment = alert;
-	    message += " Stage 1 Hypertension ";
+	    message += " Stage 1 Hypertension.";
 	} else if(bp_sys_avg  >= 160  && bp_dias_avg >= 100 ){
     	//prehypertension
 	    assesment = danger;
-	    message += " Stage 2 Hypertension ";
+	    message += " Stage 2 Hypertension.";
 	}
 
 	//HEART RATE
@@ -124,10 +124,10 @@ export const patient_assesment = function(patientdata){
 
 	//default to 80 just to skip the check right below
 	if (hr_avg > 100){
-		message += " Possible Tachycardia ";
+		message += " Possible Tachycardia.";
 		assesmentDangerLevel = 1;
 	} else if (hr_avg < 60) {
-		message += " Possible Bradycardia ";
+		message += " Possible Bradycardia.";
 		assesmentDangerLevel = 1;
 	}
 
@@ -140,7 +140,7 @@ export const patient_assesment = function(patientdata){
 	//default to 37 just to avoid the check below
 	if (temp_avg <= 36.1 || temp_avg >= 37.8){
 		dangerLevel = 1;
-		message += " Check Temperature ";
+		message += " Check Temperature.";
 	}
 
 	//upgrade the danger level if we have to
@@ -156,10 +156,10 @@ export const patient_assesment = function(patientdata){
 	*/
 	//default to 100 to have a "healthy" value that skips the check below
 	if(spo2_avg >= 90 && spo2_avg <= 95){
-		message += " possible Hypoxia ";
+		message += " possible Hypoxia.";
 		assesmentDangerLevel = 1;//alert
 	} else if (spo2_avg < 90){
-		message += " Hypoxia ";
+		message += " Hypoxia.";
 		assesmentDangerLevel = 2;//danger
 	}
 
