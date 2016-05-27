@@ -105,10 +105,10 @@ export const patient_assesment = function(patientdata){
 	    message += " Prehypertension.";
 	} else if( (bp_sys_avg  >= 140 && bp_sys_avg  <= 159) && 
     		   (bp_dias_avg >= 90  && bp_dias_avg <= 99 )){
-	    assesment = alert;
+	    assesment = jQuery.extend({}, alert);
 	    message += " Stage 1 Hypertension.";
 	} else if(bp_sys_avg  >= 160  && bp_dias_avg >= 100 ){
-	    assesment = danger;
+	    assesment = jQuery.extend({}, danger);
 	    message += " Stage 2 Hypertension.";
 	}
 
@@ -131,7 +131,7 @@ export const patient_assesment = function(patientdata){
 
 	//upgrade the danger level if we have to
 	if (assesmentDangerLevel > assesment.dangerLevel){
-		assesment = alert;
+		assesment = jQuery.extend({}, alert);
 	}
 
 	//Temperature
@@ -143,7 +143,7 @@ export const patient_assesment = function(patientdata){
 
 	//upgrade the danger level if we have to
 	if (assesmentDangerLevel > assesment.dangerLevel){
-		assesment = alert;
+		assesment = jQuery.extend({}, alert);
 	}
 
 	// SpO2 % SATURATION
@@ -164,9 +164,9 @@ export const patient_assesment = function(patientdata){
 		//upgrade the danger level if we have to
 	if (assesmentDangerLevel > assesment.dangerLevel){
 		if(assesmentDangerLevel === 1){
-			assesment = alert;
+			assesment = jQuery.extend({}, alert);
 		}else{
-			assesment = danger;
+			assesment = jQuery.extend({}, danger);
 		}
 	}
 
