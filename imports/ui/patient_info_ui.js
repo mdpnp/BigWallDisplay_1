@@ -258,7 +258,7 @@ heatStressAlert = function(patientdata, assesment){
     }
 
 
-
+//Check for mild heat stress 
     if (temp_avg >= 38.2 &&
     	hr_avg >= 110 &&
     	spo2_avg <= 92 &&
