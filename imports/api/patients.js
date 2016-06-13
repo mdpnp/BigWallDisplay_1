@@ -6,6 +6,9 @@ export const Patients = new Mongo.Collection('patient_demographic');
 // datasample_second is a collection with patient data samples (per second)
 export const Datasample_second = new Mongo.Collection('datasample_second');
 
+//assesment is a doctor/user generated assesment (as opposed to a system-generated assesment)
+export const Assesment = new Mongo.Collection('assesment');
+
 
 
 // Explicitly deny any writes in the patient_demographic collection. 
