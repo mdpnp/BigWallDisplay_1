@@ -122,6 +122,24 @@ Template.patient_info.helpers({
 
   }
 
+//returns the formated date of the latest assesment for this patient
+  ,lastAssesment(){
+    let lastestAssesment = "N.A.";
+    const instance = Template.instance();
+    if (instance.state.get('patientID')) {
+        const patientID = instance.state.get('patientID');
+        // lastDate = Assesment.find({'patientID' : Number(patientID)} , {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
+        lastestAssesment = Assesment.find({'patientID' : Number(patientID)}, {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
+    }
+    if(undefined != lastestAssesment && "N.A." != lastestAssesment){
+      //using moment library to format date : https://atmospherejs.com/momentjs/moment
+          return moment(lastestAssesment.assement_date).format('MM/DD/YY HH:mm:ss');
+    }else{
+      return lastestAssesment;
+    }
+    
+  }
+
 });
 
 
@@ -151,7 +169,6 @@ Template.patient_info.events({
 
       // Insert an assesment into the collection
       if(patientID != undefined){
-        console.log("inserting")
         Meteor.call('assesment.insert', patientID);
       }
          

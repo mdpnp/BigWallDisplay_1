@@ -57,7 +57,7 @@ Meteor.methods({
 	"assesment.insert"(patientID){
 
 		Assesment.insert({
-			patientID : patientID,
+			patientID : Number(patientID),
 			assement_date : new Date()
 		});
 
@@ -80,6 +80,6 @@ if (Meteor.isServer) {
   });
 
   Meteor.publish('assesment', function assesment_secondPublication() {
-    return assesment.find();
+    return Assesment.find();
   });
 }
