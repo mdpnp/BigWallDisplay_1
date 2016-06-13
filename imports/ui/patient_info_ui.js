@@ -248,9 +248,7 @@ heatStressAlert = function(patientdata, assesment){
     		assesment = jQuery.extend({}, danger);
     		assesment.numberOfItems = aux;
     	}
-    	console.log(message);
     	assesment.message = message + " Heat Stress Danger.";
-    	console.log(assesment.message);
     	assesment.numberOfItems += 1;
 
     	return assesment;
