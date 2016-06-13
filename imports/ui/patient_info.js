@@ -3,6 +3,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 
 import { Patients } from '../api/patients.js';
 import {Datasample_second} from '../api/patients.js';
+import {Assesment} from '../api/patients.js';
 
 import { patientHasAllergies } from '../api/demographic.js'
 // import { temperature_color } from 'patient_info_ui.js'
@@ -143,13 +144,27 @@ Template.patient_info.events({
         template.state.set('patientID', patientID);
         // console.log(patientID);
     }
+    ,"click #assespatient" : function(){
+      const patientID = Template.instance().state.get('patientID');
+      // const now = Date.now();
+      // console.log(patientID);
+
+      // Insert an assesment into the collection
+      if(patientID != undefined){
+        console.log("inserting")
+        Meteor.call('assesment.insert', patientID);
+      }
+         
+    }
 
 });
+
 
 Template.patient_info.onCreated(function piOnCreated() {
   //subscriptions
   Meteor.subscribe('patients_demo');
   Meteor.subscribe('datasample_second');
+  Meteor.subscribe('assesment');
   this.state = new ReactiveDict();
 
 });

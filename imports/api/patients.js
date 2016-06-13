@@ -43,14 +43,43 @@ Datasample_second.deny({
 	}
 });
 
+
+//The assesment collection can be updated based on user's actions
+Assesment.deny({
+	remove : function(userId, doc){
+		return true;
+	}
+});
+
+
+//METEOR METHODS
+Meteor.methods({
+	"assesment.insert"(patientID){
+
+		Assesment.insert({
+			patientID : patientID,
+			assement_date : new Date()
+		});
+
+	}
+
+});
+
+
+//SERVER SIDE CODE
 if (Meteor.isServer) {
 
-// Publication	
+// Publications
+
   Meteor.publish('patients_demo', function patientsPublication() {
     return Patients.find();
   });
 
   Meteor.publish('datasample_second', function datasample_secondPublication() {
     return Datasample_second.find();
+  });
+
+  Meteor.publish('assesment', function assesment_secondPublication() {
+    return assesment.find();
   });
 }
