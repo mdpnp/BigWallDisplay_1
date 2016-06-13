@@ -135,6 +135,7 @@ Template.patient_info.helpers({
       //using moment library to format date : https://atmospherejs.com/momentjs/moment
           return moment(lastestAssesment.assement_date).format('MM/DD/YY HH:mm:ss');
     }else{
+      lastestAssesment = "N.A.";
       return lastestAssesment;
     }
     
