@@ -53,20 +53,25 @@ Template.body.helpers({
 });
 
 Template.body.events({
-  "click #tilelayout3x4" :function(event, instance){
+  // "click #tilelayout3x4" :function(event, instance){
+  //   event.preventDefault();
+  //   instance.state.set('tileslayout', event.target.getAttribute("data-templatename"));
+  // }
+  // ,"click #differentLayout" :function(event, instance){
+  //   event.preventDefault();
+  //   instance.state.set('tileslayout', event.target.getAttribute("data-templatename"));
+  // }
+  "click .dropdown-menu li a" :function(event, instance){
     event.preventDefault();
-    // console.log(event.target.getAttribute("data-templatename")) ;
-    instance.state.set('tileslayout', event.target.getAttribute("data-templatename"));
-  }
-  ,"click #differentLayout" :function(event, instance){
-    event.preventDefault();
-    // console.log(event.target.getAttribute("data-templatename")) ;
-    instance.state.set('tileslayout', event.target.getAttribute("data-templatename"));
+    const templatename = event.target.getAttribute("data-templatename");
+    if (null != templatename && undefined != templatename)
+      instance.state.set('tileslayout', templatename);
   }
 });
 
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('patients_demo');
   this.state = new ReactiveDict();
+  // this.state.setDefault('tileslayout', 'tilelayout3x4');//differentLayout
   this.state.setDefault('tileslayout', 'tilelayout3x4');
 });
