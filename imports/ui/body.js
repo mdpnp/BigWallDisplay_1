@@ -1,7 +1,8 @@
 import { Template } from 'meteor/templating';
 
 import { Patients } from '../api/patients.js';
- 
+
+ import { ReactiveDict } from 'meteor/reactive-dict';
 
 import './patient_info.js'; 
 import './body.html';
@@ -14,7 +15,14 @@ import './body.html';
 // });
 
 Template.body.helpers({
-   patients : function() {
+  //helper funciont to reactively calcualte the tile layout
+  getTileLayout : function(){
+    //default return tilelayout3x4
+    // return 'tilelayout3x4';
+    const instance = Template.instance();
+    return instance.state.get('tileslayout');
+  }
+  ,patients : function() {
     return Patients.find({});
   },
   thispatient : function(skip){
@@ -44,6 +52,21 @@ Template.body.helpers({
   }
 });
 
+Template.body.events({
+  "click #tilelayout3x4" :function(event, instance){
+    event.preventDefault();
+    // console.log(event.target.getAttribute("data-templatename")) ;
+    instance.state.set('tileslayout', event.target.getAttribute("data-templatename"));
+  }
+  ,"click #differentLayout" :function(event, instance){
+    event.preventDefault();
+    // console.log(event.target.getAttribute("data-templatename")) ;
+    instance.state.set('tileslayout', event.target.getAttribute("data-templatename"));
+  }
+});
+
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('patients_demo');
+  this.state = new ReactiveDict();
+  this.state.setDefault('tileslayout', 'tilelayout3x4');
 });

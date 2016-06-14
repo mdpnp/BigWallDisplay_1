@@ -14,16 +14,49 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Layout 1</a></li>
-          <li><a href="#">Layout 2</a></li>
-          <li><a href="#">Layout 2</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
+          <li><a href="#" id="tilelayout3x4" data-templatename="tilelayout3x4">12 patient tiles (3 x 4)</a></li>
+          <li><a href="#" id="differentLayout" data-templatename="differentLayout">10 patient tiles (2 x 10)</a></li>
+          <!-- <li><a href="#">Layout 2</a></li> -->
+          <!-- <li role="separator" class="divider"></li> -->
+          <!-- <li><a href="#">Separated link</a></li> -->
         </ul>
       </span>
     </div>
  
- <!-- first row -->
+ <!-- {{> tilelayout3x4}} -->
+ {{> Template.dynamic template=getTileLayout }}
+ </div> <!-- container div -->
+
+</body>
+
+
+<template name="differentLayout">
+  <!-- <div class="row"> -->
+
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="background: #e6fff2;">
+        {{> patient_info}}
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="background: #cce6ff;">      
+        {{> patient_info}}
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="background: #ccffe6;">      
+        {{> patient_info}}
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="background: #99ddff;">      
+        {{> patient_info}}
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="background: #e6ffe2;">
+        {{> patient_info}}
+      </div>
+
+  <!-- </div>  -->
+</template>
+ 
+<template name="tilelayout3x4">
   <div class="row">
 
       <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="background: #e6fff2;">
@@ -91,13 +124,5 @@
  this should be replaced for a more meaningful HTML element -->
     <br/>
 
-  </div> <!-- container div -->
-<!-- 
-  {{> patient}}
-
-  {{> patient}} -->
-</body>
- 
-<!-- <template name="patientInfo">
-  <li>{{firstName}} - {{lastName}}</li>
-</template> -->
+  
+</template>
