@@ -7,6 +7,9 @@ import { Patients } from '../api/patients.js';
 import './patient_info.js'; 
 import './body.html';
 
+import './tilelayout4x3.html';
+import './tilelayout3x4.html';
+
  
 // Template.body.helpers({
 //    patients() {
@@ -72,6 +75,5 @@ Template.body.events({
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('patients_demo');
   this.state = new ReactiveDict();
-  // this.state.setDefault('tileslayout', 'tilelayout3x4');//differentLayout
   this.state.setDefault('tileslayout', 'tilelayout3x4');
 });
