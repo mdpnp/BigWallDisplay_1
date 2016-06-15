@@ -7,8 +7,13 @@ import { Patients } from '../api/patients.js';
 import './patient_info.js'; 
 import './body.html';
 
+
+//import tiles layout templates
 import './tilelayout4x3.html';
 import './tilelayout3x4.html';
+import './tilelayout10x1.html';
+import './tilelayout5x2.html';
+
 
  
 // Template.body.helpers({
