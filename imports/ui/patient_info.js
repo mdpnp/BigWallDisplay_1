@@ -37,7 +37,7 @@ Template.patient_info.helpers({
    	const instance = Template.instance();
     if (instance.state.get('patientID')) {//check patient that has been selected on the dropdown
       const patientID = instance.state.get('patientID');
-      return Patients.findOne({'patientID' : Number(patientID)});
+      return Patients.findOne({'patientID' : patientID});
     }
     // return Patients.findOne();
     return dummy_patient;
@@ -54,7 +54,8 @@ Template.patient_info.helpers({
         const patientID = instance.state.get('patientID');
         //find returns a cursor, so we need to use fetch, to convert to array. 
         // We are limiting to only one (the latest) sample --> array notation to get the object from the array
-        data = Datasample_second.find({'patientID' : Number(patientID)} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+        data = Datasample_second.find({'patientID' : patientID} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+        console.log(data);
     }
 
 
@@ -116,7 +117,7 @@ Template.patient_info.helpers({
         const patientID = instance.state.get('patientID');
         //find returns a cursor, so we need to use fetch, to convert to array. 
         // We are limiting to only one (the latest) sample --> array notation to get the object from the array
-        patientdata = Datasample_second.find({'patientID' : Number(patientID)} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+        patientdata = Datasample_second.find({'patientID' : patientID} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
     }
     return patient_tile_styles.patient_assesment(patientdata);
 
@@ -129,7 +130,7 @@ Template.patient_info.helpers({
     if (instance.state.get('patientID')) {
         const patientID = instance.state.get('patientID');
         // lastDate = Assesment.find({'patientID' : Number(patientID)} , {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
-        lastestAssesment = Assesment.find({'patientID' : Number(patientID)}, {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
+        lastestAssesment = Assesment.find({'patientID' : patientID}, {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
     }
     if(undefined != lastestAssesment /*&& "N.A." != lastestAssesment*/){
       //using moment library to format date : https://atmospherejs.com/momentjs/moment
