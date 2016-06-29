@@ -124,21 +124,31 @@ Template.patient_info.helpers({
 
 //returns the formated date of the latest assesment for this patient
   ,lastAssesment(){
-    let lastestAssesment;// = "N.A.";
+    let lastestAssesment = {}// = "N.A.";
+    let latest = undefined;
     const instance = Template.instance();
     if (instance.state.get('patientID')) {
         const patientID = instance.state.get('patientID');
         // lastDate = Assesment.find({'patientID' : Number(patientID)} , {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
-        lastestAssesment = Assesment.find({'patientID' : patientID}, {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
+        latest = Assesment.find({'patientID' : patientID}, {sort : {'assement_date' : -1}, limit : 1}).fetch()[0];
     }
-    if(undefined != lastestAssesment /*&& "N.A." != lastestAssesment*/){
+    if(undefined != latest /*&& "N.A." != lastestAssesment*/){
       //using moment library to format date : https://atmospherejs.com/momentjs/moment
-          return moment(lastestAssesment.assement_date).format('MM/DD/YY HH:mm:ss');
+          // return moment(lastestAssesment.assement_date).format('MM/DD/YY HH:mm:ss');
+                lastestAssesment.message =moment(latest.assement_date).format('MM/DD/YY HH:mm:ss');
+      lastestAssesment.color = "label-success";
+      return lastestAssesment;
     }else{
-      lastestAssesment = "Not Available";
+      lastestAssesment.message = "Not Available";
+      lastestAssesment.color = "label-danger";
       return lastestAssesment;
     }
     
+  }
+
+//returns the color of the assesment label
+  ,lastCheckedLableColor : function(){
+
   }
 
 });
