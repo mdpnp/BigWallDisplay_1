@@ -57,7 +57,7 @@ Meteor.methods({
 	"assesment.insert"(patientID){
 
 		Assesment.insert({
-			patientID : Number(patientID),
+			patientID : patientID,
 			assement_date : new Date()
 		});
 

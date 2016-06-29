@@ -55,7 +55,6 @@ Template.patient_info.helpers({
         //find returns a cursor, so we need to use fetch, to convert to array. 
         // We are limiting to only one (the latest) sample --> array notation to get the object from the array
         data = Datasample_second.find({'patientID' : patientID} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
-        console.log(data);
     }
 
 
