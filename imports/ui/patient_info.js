@@ -57,15 +57,27 @@ Template.patient_info.helpers({
         data = Datasample_second.find({'patientID' : patientID} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
     }
 
+    if(data === undefined){
+      const defaultObj = {
+              temperature : '-'
+            ,blood_pressure_sys : '-'
+            ,blood_pressure_dias : '-'
+            ,heart_rate : '-'
+            ,spo2_sat : '-'
+            ,pulse_rate : '-'
+      }
+      return defaultObj;
+    }
 
-    const temp_avg = data === undefined || data.temperature === undefined ? '-' : data.temperature.sum / data.temperature.count;
-    const bp_sys_avg = data === undefined || data.blood_pressure_sys === undefined ? '-' : data.blood_pressure_sys.sum / data.blood_pressure_sys.count;
-    const bp_dias_avg = data === undefined || data.blood_pressure_dias === undefined ? '-' : data.blood_pressure_dias.sum / data.blood_pressure_dias.count;
-    const hr_avg = data === undefined || data.heart_rate === undefined ? '-' : data.heart_rate.sum / data.heart_rate.count;
-    const spo2_avg = data === undefined || data.spo2 === undefined ? '-' : data.spo2.sum / data.spo2.count;
-    const pr_avg = data === undefined || data.pulse_rate === undefined ? '-' : data.pulse_rate.sum / data.pulse_rate.count;
 
-    data_sample = {
+    const temp_avg = data['Temperature'] === undefined  || data['Temperature'].count < 1 ? '-' : data['Temperature'].sum / data['Temperature'].count;
+    const bp_sys_avg = data['NIBPSystolic'] === undefined || data['NIBPSystolic'].count < 1 ? '-' : data['NIBPSystolic'].sum / data['NIBPSystolic'].count;
+    const bp_dias_avg = data['NIBPDiastolic'] === undefined  || data['NIBPDiastolic'].count < 1 ? '-' : data['NIBPDiastolic'].sum / data['NIBPDiastolic'].count;
+    const hr_avg = data === data['ECGHeartRate'] === undefined || data['ECGHeartRate'].count < 1? '-' : data['ECGHeartRate'].sum / data['ECGHeartRate'].count;
+    const spo2_avg = data['SpO2'] === undefined || data['SpO2'] .count < 1 ? '-' : data['SpO2'] .sum / data['SpO2'] .count;
+    const pr_avg = data.SpO2PulseRate === undefined || data.SpO2PulseRate.count < 1 ? '-' : data.SpO2PulseRate.sum / data.SpO2PulseRate.count;
+
+    const data_sample = {
       temperature : temp_avg
       ,blood_pressure_sys : bp_sys_avg
       ,blood_pressure_dias : bp_dias_avg
