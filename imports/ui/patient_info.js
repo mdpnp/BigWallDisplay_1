@@ -54,7 +54,7 @@ Template.patient_info.helpers({
         const patientID = instance.state.get('patientID');
         //find returns a cursor, so we need to use fetch, to convert to array. 
         // We are limiting to only one (the latest) sample --> array notation to get the object from the array
-        data = Datasample_second.find({'patientID' : patientID} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+        data = Datasample_second.find({'patientID' : patientID} , {sort : {'timeStamp' : -1}, limit : 1}).fetch()[0];
     }
 
     if(data === undefined){
@@ -128,7 +128,7 @@ Template.patient_info.helpers({
         const patientID = instance.state.get('patientID');
         //find returns a cursor, so we need to use fetch, to convert to array. 
         // We are limiting to only one (the latest) sample --> array notation to get the object from the array
-        patientdata = Datasample_second.find({'patientID' : patientID} , {sort : {'timestamp' : -1}, limit : 1}).fetch()[0];
+        patientdata = Datasample_second.find({'patientID' : patientID} , {sort : {'timeStamp' : -1}, limit : 1}).fetch()[0];
     }
     return patient_tile_styles.patient_assesment(patientdata);
 
