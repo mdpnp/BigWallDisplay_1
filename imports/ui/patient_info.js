@@ -73,7 +73,7 @@ Template.patient_info.helpers({
     const temp_avg = data['Temperature'] === undefined  || data['Temperature'].count < 1 ? '-' : data['Temperature'].sum / data['Temperature'].count;
     const bp_sys_avg = data['NIBPSystolic'] === undefined || data['NIBPSystolic'].count < 1 ? '-' : data['NIBPSystolic'].sum / data['NIBPSystolic'].count;
     const bp_dias_avg = data['NIBPDiastolic'] === undefined  || data['NIBPDiastolic'].count < 1 ? '-' : data['NIBPDiastolic'].sum / data['NIBPDiastolic'].count;
-    const hr_avg = data === data['ECGHeartRate'] === undefined || data['ECGHeartRate'].count < 1? '-' : data['ECGHeartRate'].sum / data['ECGHeartRate'].count;
+    const hr_avg = data['ECGHeartRate'] === undefined || data['ECGHeartRate'].count < 1? '-' : data['ECGHeartRate'].sum / data['ECGHeartRate'].count;
     const spo2_avg = data['SpO2'] === undefined || data['SpO2'] .count < 1 ? '-' : data['SpO2'] .sum / data['SpO2'] .count;
     const pr_avg = data.SpO2PulseRate === undefined || data.SpO2PulseRate.count < 1 ? '-' : data.SpO2PulseRate.sum / data.SpO2PulseRate.count;
 
